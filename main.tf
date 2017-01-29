@@ -16,6 +16,7 @@ resource "openstack_compute_keypair_v2" "terraform" {
   region = "${var.region}"
   public_key = "${file("${var.ssh_key_file}.pub")}"
 }
+/*
 #
 # AWS resources
 #
@@ -26,7 +27,7 @@ provider "aws" {
     secret_key = "${var.aws_secret_key}"
     region = "eu-central-1"
 }
-/*
+
 # Terraform.state stored on AWS S3
 resource "terraform_remote_state" "aws" {
     backend = "s3"
