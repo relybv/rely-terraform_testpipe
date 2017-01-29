@@ -37,6 +37,7 @@ node {
 //                } catch (Exception err) {
 //                   currentBuild.result = 'SUCCESS'
 //                }
+               }
             }
          }
       }
