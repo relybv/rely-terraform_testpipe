@@ -20,7 +20,7 @@ node {
 //         step([$class: 'JUnitResultArchiver', testResults: 'spec/reports/*.xml'])
 //         junit 'spec/reports/*.xml'
       stage('Documentation') {
-         sh '/usr/local/bin/terraform-docs markdown ./ > TF.md'
+         sh '/usr/local/bin/terraform-docs markdown ./ | tee TF.md'
       }
       stage('Acceptance tests') 
       {
