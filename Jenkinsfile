@@ -7,7 +7,6 @@ node {
       }
       stage('Dependencies') {
          sh 'cd $WORKSPACE'
-//         sh '/usr/bin/bundle install --jobs=2 --path vendor/bundle'
       }
       stage('Code quality') {
          parallel (
@@ -15,8 +14,6 @@ node {
 //            lint: { sh '/usr/bin/bundle exec rake lint' },
             spec: { sh '/usr/local/bin/terraform validate' }
          )
-//         step([$class: 'JUnitResultArchiver', testResults: 'spec/reports/*.xml'])
-//         junit 'spec/reports/*.xml'
       stage('Documentation') {
          sh '/usr/local/bin/terraform-docs markdown ./ | tee TF.md'
       }
@@ -24,20 +21,15 @@ node {
       {
          withEnv(['OS_AUTH_URL=https://access.openstack.rely.nl:5000/v2.0', 'OS_TENANT_ID=10593dbf4f8d4296a25cf942f0567050', 'OS_TENANT_NAME=lab', 'OS_PROJECT_NAME=lab', 'OS_REGION_NAME=RegionOne']) {
             withCredentials([usernamePassword(credentialsId: 'OS_CERT', passwordVariable: 'TF_VAR_password', usernameVariable: 'TF_VAR_user_name')]) {
-                  sh '/usr/local/bin/terraform plan -no-color -out=plan | tee TFPLAN.md'
-//                sh 'BEAKER_set="openstack-ubuntu-server-1404-x64" /usr/bin/bundle exec rake setbeaker_env > openstack-ubuntu-server-1404-x64.log'
-//                try {
-                   // False if failures in logfile
-//                   sh "grep --quiet Failures openstack-ubuntu-server-1404-x64.log"
-//                   sh "grep -A100000 Failures openstack-ubuntu-server-1404-x64.log"
-//                   currentBuild.result = 'FAILURE'
-//                   emailext attachLog: true, body: '', recipientProviders: [[$class: 'DevelopersRecipientProvider']], subject: 'SUCCESS', to: 'paulgomersbach+euxeg3u1sxmmdpq07rcm@boards.trello.com'
-//                } catch (Exception err) {
-//                   currentBuild.result = 'SUCCESS'
-//                }
+                  sh '/usr/local/bin/terraform plan -no-color | tee TFPLAN.md'
+                  sh '/usr/local/bin/terraform apply -no-color | tee TFEXEC.md'
                }
             }
          }
+      }
+      stage('Cleanup')
+      {
+         sh '/usr/local/bin/terraform destroy -force -no-color | tee TFDEST.md'
       }
    }
    archiveArtifacts '*.md'
