@@ -17,19 +17,18 @@ node {
       stage('Documentation') {
          sh '/usr/local/bin/terraform-docs markdown ./ | tee TF.md'
       }
-      stage('Provisioning') 
-      {
-         withEnv(['OS_AUTH_URL=https://access.openstack.rely.nl:5000/v2.0', 'OS_TENANT_ID=10593dbf4f8d4296a25cf942f0567050', 'OS_TENANT_NAME=lab', 'OS_PROJECT_NAME=lab', 'OS_REGION_NAME=RegionOne']) {
-            withCredentials([usernamePassword(credentialsId: 'OS_CERT', passwordVariable: 'TF_VAR_password', usernameVariable: 'TF_VAR_user_name')]) {
-                  sh '/usr/local/bin/terraform plan -no-color | tee TFPLAN.md'
-                  sh '/usr/local/bin/terraform apply -no-color | tee TFEXEC.md'
-               }
+      withEnv(['OS_AUTH_URL=https://access.openstack.rely.nl:5000/v2.0', 'OS_TENANT_ID=10593dbf4f8d4296a25cf942f0567050', 'OS_TENANT_NAME=lab', 'OS_PROJECT_NAME=lab', 'OS_REGION_NAME=RegionOne']) {
+         withCredentials([usernamePassword(credentialsId: 'OS_CERT', passwordVariable: 'TF_VAR_password', usernameVariable: 'TF_VAR_user_name')]) {
+            stage('Provisioning') 
+            {
+               sh '/usr/local/bin/terraform plan -no-color | tee TFPLAN.md'
+               sh '/usr/local/bin/terraform apply -no-color | tee TFEXEC.md'
+            }
+            stage('Cleanup')
+            {
+               sh '/usr/local/bin/terraform destroy -force -no-color | tee TFDEST.md'
             }
          }
-      }
-      stage('Cleanup')
-      {
-         sh '/usr/local/bin/terraform destroy -force -no-color | tee TFDEST.md'
       }
    }
    archiveArtifacts '*.md'
