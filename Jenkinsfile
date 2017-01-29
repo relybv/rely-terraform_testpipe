@@ -41,5 +41,5 @@ node {
          }
       }
    }
-   archiveArtifacts '*.log'
+   archiveArtifacts 'TF.md'
 }
