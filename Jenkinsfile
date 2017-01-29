@@ -20,8 +20,7 @@ node {
 //         step([$class: 'JUnitResultArchiver', testResults: 'spec/reports/*.xml'])
 //         junit 'spec/reports/*.xml'
       stage('Documentation') {
-         sh '/usr/local/bin/terraform-doc'
-         publishHTML([allowMissing: false, alwaysLinkToLastBuild: true, keepAll: false, reportDir: 'doc', reportFiles: 'index.html', reportName: 'HTML Report'])
+         sh '/usr/local/bin/terraform-docs markdown ./ > TF.md'
       }
       stage('Acceptance tests') 
       {
