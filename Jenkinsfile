@@ -17,7 +17,7 @@ node {
 //            lint: { sh '/usr/bin/bundle exec rake lint' },
             spec: { sh '/usr/local/bin/terraform validate' }
          )
-         step([$class: 'JUnitResultArchiver', testResults: 'spec/reports/*.xml'])
+//         step([$class: 'JUnitResultArchiver', testResults: 'spec/reports/*.xml'])
 //         junit 'spec/reports/*.xml'
       stage('Documentation') {
          sh '/usr/local/bin/terraform-doc'
