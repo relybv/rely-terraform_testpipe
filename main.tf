@@ -1,4 +1,3 @@
-rform_testpipe
 # Configure the openstack provider
 #
 provider "openstack" {

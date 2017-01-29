@@ -18,11 +18,7 @@ resource "template_file" "init_lb" {
 resource "template_file" "init_appl" {
     template = "${file("init_appl.tpl")}"
     vars {
-        monitor_address = "${var.monitor1_ip_address}"
-        nfs_address = "${var.db1_ip_address}"
-        db_address = "${var.db1_ip_address}"
-        win_address = "${var.win1_ip_address}"
-        ext_lb_fqdn = "${var.ext_lb_name}.${var.environment}.${var.customer}.${var.domain_base}"
+        test = "test"
     }
 }
 
