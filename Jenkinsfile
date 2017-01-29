@@ -14,6 +14,7 @@ node {
 //            lint: { sh '/usr/bin/bundle exec rake lint' },
             spec: { sh '/usr/local/bin/terraform validate' }
          )
+      }
       stage('Documentation') {
          sh '/usr/local/bin/terraform-docs markdown ./ | tee TF.md'
       }
