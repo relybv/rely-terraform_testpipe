@@ -40,5 +40,6 @@ node {
             }
          }
       }
+   }
    archiveArtifacts '*.log'
 }
