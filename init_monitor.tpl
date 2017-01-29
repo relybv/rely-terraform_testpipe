@@ -1,6 +1,6 @@
 #!/bin/bash
-echo "Start of boot script"
 
+echo "Create hiera directories"
 mkdir -p /etc/puppetlabs/puppet
 mkdir -p /etc/puppetlabs/code/environments/production/hieradata
 
@@ -23,4 +23,4 @@ cat <<'EOF' >> /etc/puppetlabs/puppet/hiera.yaml
 EOF
 
 echo "Bootstrap puppet and apply role"
-# wget https://raw.githubusercontent.com/relybv/dirict-role_lb/master/files/bootme.sh && bash bootme.sh
+# wget https://raw.githubusercontent.com/relybv/dirict-role_monitor/master/files/bootme.sh && bash bootme.sh

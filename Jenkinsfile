@@ -2,8 +2,6 @@ node {
    wrap([$class: 'AnsiColorBuildWrapper']) {
       properties([buildDiscarder(logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '5', numToKeepStr: '6')), pipelineTriggers([pollSCM('H/15 * * * *')])])
       stage('Checkout') { // for display purposes
-         // Clean workspace before checkout
-         step ([$class: 'WsCleanup'])
          // Get some code from a GitHub repository
          git 'https://github.com/relybv/rely-terraform_testpipe.git'
       }
@@ -22,10 +20,11 @@ node {
       stage('Documentation') {
          sh '/usr/local/bin/terraform-docs markdown ./ | tee TF.md'
       }
-      stage('Acceptance tests') 
+      stage('Provisioning') 
       {
          withEnv(['OS_AUTH_URL=https://access.openstack.rely.nl:5000/v2.0', 'OS_TENANT_ID=10593dbf4f8d4296a25cf942f0567050', 'OS_TENANT_NAME=lab', 'OS_PROJECT_NAME=lab', 'OS_REGION_NAME=RegionOne']) {
             withCredentials([usernamePassword(credentialsId: 'OS_CERT', passwordVariable: 'OS_PASSWORD', usernameVariable: 'OS_USERNAME')]) {
+                  sh '/usr/local/bin/terraform plan'
 //                sh 'BEAKER_set="openstack-ubuntu-server-1404-x64" /usr/bin/bundle exec rake setbeaker_env > openstack-ubuntu-server-1404-x64.log'
 //                try {
                    // False if failures in logfile

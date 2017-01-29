@@ -3,6 +3,21 @@ resource "openstack_compute_servergroup_v2" "appl" {
   policies = ["anti-affinity"]
 }
 
+resource "openstack_compute_instance_v2" "monitor1" {
+  name = "${var.customer}-${var.environment}-${var.monitor1_hostname}"
+  region = "${var.region}"
+  image_name = "${var.image_ub}"
+  flavor_name = "${var.flavor_mon}"
+  key_pair = "${openstack_compute_keypair_v2.terraform.name}"
+  security_groups = [ "${openstack_compute_secgroup_v2.monitor.name}" ]
+  floating_ip = "${openstack_compute_floatingip_v2.monitor.address}"
+  user_data = "${template_file.init_monitor.rendered}"
+  network {
+    uuid = "${openstack_networking_network_v2.frontend.id}"
+    fixed_ip_v4 = "${var.monitor1_ip_address}"
+  }
+}
+
 resource "openstack_compute_instance_v2" "lb1" {
   name = "${var.customer}-${var.environment}-${var.lb1_hostname}"
   region = "${var.region}"

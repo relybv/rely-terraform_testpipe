@@ -12,7 +12,7 @@ resource "null_resource" "post_checks_lb1" {
   }
   provisioner "remote-exec" {
     inline = [
-      "sudo /opt/puppetlabs/puppet/bin/rspec /usr/local/rspec_tests/ -f d"
+      "# sudo /opt/puppetlabs/puppet/bin/rspec /usr/local/rspec_tests/ -f d"
     ]
   }
 }
@@ -34,7 +34,7 @@ resource "null_resource" "post_checks_appl1" {
   }
   provisioner "remote-exec" {
     inline = [
-      "sudo /opt/puppetlabs/puppet/bin/rspec /usr/local/rspec_tests/ -f d"
+      "# sudo /opt/puppetlabs/puppet/bin/rspec /usr/local/rspec_tests/ -f d"
     ]
   }
 }
@@ -56,7 +56,7 @@ resource "null_resource" "post_checks_appl2" {
   }
   provisioner "remote-exec" {
     inline = [
-      "sudo /opt/puppetlabs/puppet/bin/rspec /usr/local/rspec_tests/ -f d"
+      "# sudo /opt/puppetlabs/puppet/bin/rspec /usr/local/rspec_tests/ -f d"
     ]
   }
 }

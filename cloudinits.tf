@@ -22,24 +22,11 @@ resource "template_file" "init_appl" {
     }
 }
 
-# Template for db cloud-init bash
-resource "template_file" "init_db" {
-    template = "${file("init_db.tpl")}"
-    vars {
-        monitor_address = "${var.monitor1_ip_address}"
-        db_export_net = "${var.main_subnet}"
-    }
-}
-
 # Template for monitor cloud-init bash
 resource "template_file" "init_monitor" {
     template = "${file("init_monitor.tpl")}"
-}
-
-# Template for win cloud-init powershell
-resource "template_file" "init_win" {
-    template = "${file("init_win.tpl")}"
     vars {
-        monitor_address = "${var.monitor1_ip_address}"
+        test = "test"
     }
 }
+
