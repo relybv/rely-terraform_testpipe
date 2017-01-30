@@ -25,6 +25,10 @@ node {
                sh '/usr/local/bin/terraform plan -no-color | tee TFPLAN.md'
                sh '/usr/local/bin/terraform apply -no-color | tee TFEXEC.md'
             }
+            stage('Aceptance tests')
+            {
+               sh 'echo 'selenium tests'
+            }
             stage('Cleanup')
             {
                sh '/usr/local/bin/terraform destroy -force -no-color | tee TFDEST.md'
