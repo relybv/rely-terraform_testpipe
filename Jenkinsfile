@@ -27,7 +27,7 @@ node {
             }
             stage('Acceptance tests')
             {
-               sh 'echo 'selenium tests'
+               sh 'echo selenium tests'
             }
             stage('Cleanup')
             {
