@@ -33,6 +33,7 @@ variable "ssh_key_file" {
 variable "swift_bucket_name" {
     default = "terraform-state-rely-catest"
 }
+
 variable "swift_region" {
     default = "eu-central-1"
 }

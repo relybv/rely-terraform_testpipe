@@ -5,7 +5,7 @@ resource "null_resource" "post_checks_lb1" {
   connection {
     host = "${openstack_compute_floatingip_v2.lb.address}"
     user = "${var.lb_username}"
-    private_key = "${var.ssh_key_file}"
+    private_key = "${file(var.ssh_key_file)}"
   }
   provisioner "remote-exec" {
     script = "wait_provision.sh"
@@ -24,10 +24,10 @@ resource "null_resource" "post_checks_appl1" {
   connection {
     bastion_host = "${openstack_compute_floatingip_v2.monitor.address}"
     bastion_user = "${var.monitor_username}"
-    bastion_private_key = "${var.ssh_key_file}"
+    bastion_private_key = "${file(var.ssh_key_file)}"
     host = "${var.appl1_ip_address}"
     user = "${var.appl_username}"
-    private_key = "${var.ssh_key_file}"
+    private_key = "${file(var.ssh_key_file)}"
   }
   provisioner "remote-exec" {
     script = "wait_provision.sh"
@@ -46,10 +46,10 @@ resource "null_resource" "post_checks_appl2" {
   connection {
     bastion_host = "${openstack_compute_floatingip_v2.monitor.address}"
     bastion_user = "${var.monitor_username}"
-    bastion_private_key = "${var.ssh_key_file}"
+    bastion_private_key = "${file(var.ssh_key_file)}"
     host = "${var.appl2_ip_address}"
     user = "${var.appl_username}"
-    private_key = "${var.ssh_key_file}"
+    private_key = "${file(var.ssh_key_file)}"
   }
   provisioner "remote-exec" {
     script = "wait_provision.sh"

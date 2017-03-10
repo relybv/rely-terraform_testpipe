@@ -1,4 +1,4 @@
-output "1a. DirICT configuratie overzicht" {
+output "1a. Configuratie overzicht" {
   value = "Versie 1.0"
 }
 output "1b. Klantnaam" {

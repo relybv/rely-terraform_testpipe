@@ -11,7 +11,7 @@ resource "openstack_compute_instance_v2" "monitor1" {
   key_pair = "${openstack_compute_keypair_v2.terraform.name}"
   security_groups = [ "${openstack_compute_secgroup_v2.monitor.name}" ]
   floating_ip = "${openstack_compute_floatingip_v2.monitor.address}"
-  user_data = "${template_file.init_monitor.rendered}"
+  user_data = "${data.template_file.init_monitor.rendered}"
   network {
     uuid = "${openstack_networking_network_v2.frontend.id}"
     fixed_ip_v4 = "${var.monitor1_ip_address}"
@@ -26,7 +26,7 @@ resource "openstack_compute_instance_v2" "lb1" {
   key_pair = "${openstack_compute_keypair_v2.terraform.name}"
   security_groups = [ "${openstack_compute_secgroup_v2.lb.name}" ]
   floating_ip = "${openstack_compute_floatingip_v2.lb.address}"
-  user_data = "${template_file.init_lb.rendered}"
+  user_data = "${data.template_file.init_lb.rendered}"
   network {
     uuid = "${openstack_networking_network_v2.frontend.id}"
     fixed_ip_v4 = "${var.lb1_ip_address}"
@@ -40,7 +40,7 @@ resource "openstack_compute_instance_v2" "appl1" {
   flavor_name = "${var.flavor_appl}"
   key_pair = "${openstack_compute_keypair_v2.terraform.name}"
   security_groups = [ "${openstack_compute_secgroup_v2.frontnet.name}" ]
-  user_data = "${template_file.init_appl.rendered}"
+  user_data = "${data.template_file.init_appl.rendered}"
   network {
     uuid = "${openstack_networking_network_v2.frontend.id}"
     fixed_ip_v4 = "${var.appl1_ip_address}"
@@ -54,7 +54,7 @@ resource "openstack_compute_instance_v2" "appl2" {
   flavor_name = "${var.flavor_appl}"
   key_pair = "${openstack_compute_keypair_v2.terraform.name}"
   security_groups = [ "${openstack_compute_secgroup_v2.frontnet.name}" ]
-  user_data = "${template_file.init_appl.rendered}"
+  user_data = "${data.template_file.init_appl.rendered}"
   network {
     uuid = "${openstack_networking_network_v2.frontend.id}"
     fixed_ip_v4 = "${var.appl2_ip_address}"
