@@ -25,6 +25,7 @@ node {
             {
                sh '/usr/local/bin/terraform plan -no-color | tee TFPLAN.md'
                sh '/usr/local/bin/terraform apply -no-color | tee TFEXEC.md'
+               sh 'pwd; ls $HOME'
             }
             stage('Acceptance tests')
             {
