@@ -10,9 +10,7 @@ node {
       }
       stage('Code quality') {
          parallel (
-//            syntax: { sh '/usr/bin/bundle exec rake syntax' },
-//            lint: { sh '/usr/bin/bundle exec rake lint' },
-            spec: { sh '/usr/local/bin/terraform validate' }
+            validate: { sh '/usr/local/bin/terraform validate' }
          )
       }
       stage('Documentation') {
