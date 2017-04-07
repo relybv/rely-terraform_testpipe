@@ -2,6 +2,8 @@ node {
    wrap([$class: 'AnsiColorBuildWrapper']) {
       properties([buildDiscarder(logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '5', numToKeepStr: '6')), pipelineTriggers([pollSCM('H/15 * * * *')])])
       stage('Checkout') { // for display purposes
+         // send to slack
+         slackSend "Started ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)"
          // Get some code from a GitHub repository
          git 'https://github.com/relybv/rely-terraform_testpipe.git'
       }
@@ -25,9 +27,9 @@ node {
                sh '/usr/local/bin/terraform apply -no-color | tee TFEXEC.md'
                sh 'pwd; ls $HOME; cat ~/.ssh/id_rsa.rely-citest'
             }
-            stage('Acceptance tests')
+            stage('Performance tests')
             {
-               sh 'echo selenium tests'
+               sh 'bzt perftests/load.yml'
             }
             stage('Cleanup')
             {
