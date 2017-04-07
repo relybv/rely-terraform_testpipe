@@ -37,6 +37,7 @@ node {
          }
       }
    }
+
    archiveArtifacts '*.md'
    archiveArtifacts '*.png'
    perfReport 'perf-plot.csv'
