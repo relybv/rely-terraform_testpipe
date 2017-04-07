@@ -1,7 +1,7 @@
 execution:
 - concurrency: 100
   ramp-up: 10s
-  hold-for: 30s
+  hold-for: 60s
   scenario: simple
 
 scenarios:
@@ -20,4 +20,4 @@ reporting:
   dump-csv: perf-plot.csv
 - module: junit-xml
   filename: perf-junit.xml
-  data-source: pass-fail
+  data-source: sample-labels
