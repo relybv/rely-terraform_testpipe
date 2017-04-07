@@ -1,7 +1,7 @@
 execution:
 - concurrency: 100
-  ramp-up: 1m
-  hold-for: 1m30s
+  ramp-up: 10s
+  hold-for: 30s
   scenario: simple
 
 scenarios:
@@ -9,3 +9,15 @@ scenarios:
     think-time: 0.75
     requests:
     - http://blazedemo.com/
+
+reporting:
+- module: final-stats
+  summary: true  # overall samples count and percent of failures
+  percentiles: true  # display average times and percentiles
+  failed-labels: false  # provides list of sample labels with failures
+  test-duration: true  # provides test duration
+  dump-xml: perf-perf.xml
+  dump-csv: perf-plot.csv
+- module: junit-xml
+  filename: perf-junit.xml
+  data-source: pass-fail

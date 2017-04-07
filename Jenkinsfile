@@ -25,11 +25,10 @@ node {
             {
                sh '/usr/local/bin/terraform plan -no-color | tee TFPLAN.md'
                sh '/usr/local/bin/terraform apply -no-color | tee TFEXEC.md'
-               sh 'pwd; ls $HOME; cat ~/.ssh/id_rsa.rely-citest'
             }
             stage('Performance tests')
             {
-               sh 'bzt perftests/load.yml'
+               sh 'bzt perftests/load.yml -o settings.artifacts-dir="${WORKSPACE}/perftests/output/"'
             }
             stage('Cleanup')
             {
@@ -40,4 +39,5 @@ node {
    }
    archiveArtifacts '*.md'
    archiveArtifacts '*.png'
+   perfReport 'perf-plot.csv'
 }
