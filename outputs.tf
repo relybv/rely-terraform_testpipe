@@ -1,3 +1,7 @@
+output "loadurl" {
+  value = "http://blazedemo.com/"
+}
+
 output "1a. Configuratie overzicht" {
   value = "Versie 1.0"
 }
