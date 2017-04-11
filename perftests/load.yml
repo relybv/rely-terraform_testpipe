@@ -5,7 +5,6 @@ execution:
 scenarios:
   simple:
     requests:
-     - http://blazedemo.com/
 
 reporting:
 - module: final-stats
