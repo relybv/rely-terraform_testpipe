@@ -24,8 +24,8 @@ node {
          withCredentials([usernamePassword(credentialsId: 'OS_CERT', passwordVariable: 'TF_VAR_password', usernameVariable: 'TF_VAR_user_name')]) {
             stage('Provisioning') 
             {
-               sh '/usr/local/bin/terraform plan -no-color | tee TFPLAN.md'
-               sh '/usr/local/bin/terraform apply -no-color | tee TFEXEC.md'
+               sh 'TF_VAR_environment=blaat /usr/local/bin/terraform plan -no-color | tee TFPLAN.md'
+               sh 'TF_VAR_environment=blaat /usr/local/bin/terraform apply -no-color | tee TFEXEC.md'
             }
             stage('Performance tests')
             {
@@ -35,7 +35,7 @@ node {
             }
             stage('Cleanup')
             {
-               sh '/usr/local/bin/terraform destroy -force -no-color | tee TFDEST.md'
+               sh 'TF_VAR_environment=blaat /usr/local/bin/terraform destroy -force -no-color | tee TFDEST.md'
             }
          }
       }
