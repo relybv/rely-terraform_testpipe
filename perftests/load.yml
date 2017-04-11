@@ -1,14 +1,24 @@
 execution:
-- concurrency: 100
-  ramp-up: 10s
-  hold-for: 60s
-  scenario: simple
+- concurrency: 5
+  executor: selenium
+  ramp-up: 1m
+  hold-for: 30s
+  scenario: reach-home-page-selenium-test
 
 scenarios:
-  simple:
-    think-time: 0.75
+  reach-home-page-selenium-test:
+    browser: Firefox
+    timeout: 10
+    think-time: 1s500ms
+    default-address: http://demo.blazemeter.com
     requests:
-    - http://blazedemo.com/
+    - url: /
+      assert:
+      - contains:
+        - blazemeter
+        - Trusted
+        subject: body
+        regexp: false
 
 reporting:
 - module: final-stats

@@ -9,6 +9,7 @@ node {
       }
       stage('Dependencies') {
          sh 'cd $WORKSPACE'
+         sh 'export TF_VAR_environment=${env.JOB_NAME}${env.BUILD_NUMBER}
       }
       stage('Code quality') {
          parallel (
