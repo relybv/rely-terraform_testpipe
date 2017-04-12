@@ -1,5 +1,5 @@
 # Template for lb cloud-init bash
-data "template_file" "init_lb" {
+resource "template_file" "init_lb" {
     template = "${file("init_lb.tpl")}"
     vars {
         appl1_address = "${var.appl1_ip_address}"
@@ -15,18 +15,35 @@ data "template_file" "init_lb" {
 }
 
 # Template for appl cloud-init bash
-data "template_file" "init_appl" {
+resource "template_file" "init_appl" {
     template = "${file("init_appl.tpl")}"
     vars {
-        test = "test"
+        monitor_address = "${var.monitor1_ip_address}"
+        nfs_address = "${var.db1_ip_address}"
+        db_address = "${var.db1_ip_address}"
+        win_address = "${var.win1_ip_address}"
+        ext_lb_fqdn = "${var.ext_lb_name}.${var.environment}.${var.customer}.${var.domain_base}"
+    }
+}
+
+# Template for db cloud-init bash
+resource "template_file" "init_db" {
+    template = "${file("init_db.tpl")}"
+    vars {
+        monitor_address = "${var.monitor1_ip_address}"
+        db_export_net = "${var.main_subnet}"
     }
 }
 
 # Template for monitor cloud-init bash
-data "template_file" "init_monitor" {
+resource "template_file" "init_monitor" {
     template = "${file("init_monitor.tpl")}"
-    vars {
-        test = "test"
-    }
 }
 
+# Template for win cloud-init powershell
+resource "template_file" "init_win" {
+    template = "${file("init_win.tpl")}"
+    vars {
+        monitor_address = "${var.monitor1_ip_address}"
+    }
+}
