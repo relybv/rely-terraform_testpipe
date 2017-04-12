@@ -24,7 +24,7 @@ node {
             stage('Provisioning') 
             {
                sh "TF_VAR_environment=${env.BUILD_NUMBER} /usr/local/bin/terraform plan -no-color | tee TFPLAN.md"
-               sh "TF_VAR_environment=${env.BUILD_NUMBER} /usr/local/bin/terraform apply -no-color | tee TFEXEC.md"
+//               sh "TF_VAR_environment=${env.BUILD_NUMBER} /usr/local/bin/terraform apply -no-color | tee TFEXEC.md"
             }
             stage('Performance tests')
             {
