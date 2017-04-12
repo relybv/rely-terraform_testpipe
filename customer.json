@@ -1,0 +1,40 @@
+{
+    "db_password": "changeme",
+    "ssh_keys": {
+        "niels": {
+            "user": "niels@dirict.nl",
+            "ssh_key": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDMzFkXTyxT06ZVP4lt17tSGthSORzKfErVRXwTDZ6/a8fRliSaCI54Y8iH4PMhB3I/gqk884xLapYgrB/v/bWCp9qDeO8nkq5zu6vjiMpLUQJkKBf3wwY8rCbDXCqCpugdJs2vi0WUqK4knBF/fmLGkMBp7xQmzwplWyNxz3yFIKmejgojF/kafG49ws1UY3ebWCglvO2shHpuTX9fRmbAN/PjYzkmNP16iAMMv2qsuYY3/yT9DnFXgvGc3qEvqGowxxjCLRQBMmRxc4W4rRif4OZt1mc9OFx867v+otkv9ohSLQMa+9dQFbZop7MKK8i6XHrGaJNM2AncLrb8Xs+D niels@dirict.nl"
+        },
+        "martijn": {
+            "user": "martijn@dirict.nl",
+            "ssh_key": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDCQS1UVNsbVz4T3GKWFwEhgKmv6smVL9WPL37x80vws50VzxloDePR5CzBosRW1fYl+T4y4GXHe69m6heAGPl7UBs9rBhJtCIQIASFRy7wrebzKHOkEMJWxtP4V0tMn9jgmgnpnjw5g+oqcy10sc4AhHlYgJecNJq7A0mh5NqcQZoHrxP9DKU5Eo2g3Ns+YVHyUh1o0vrfPh3lfs8uzahSACig7sNc8YTICQPx1aUYZDqAznTvlgs8/RaWzlvfUzddO02xuNMTo0h9x6L739PesK1lwer7lXg9/Gyn+p9V5yFxrn+d63L7GZN+Q85ec8EIn2QdBhoF0Y9e+zaE4GtJ martijn@dirict.nl"
+        },
+        "luc": {
+            "user": "luc@dirict.nl",
+            "ssh_key": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCsN0pCBlGJciXHegCBZirDTVtSZQxd2rmv9OsDiZ1DKuOiuLtHRWUKO2WjzRY03sUsVOfKuD8ZmiUW3L2UaFPsRcmi5LVy1vCZRStmJm7J6XoUuaK92vToruMVLaeaZGkhPQdsHAkiB9NflSH9Zc5JSyhx1METXmHpiIhCHY2M4xhr9/hjwtQYT5rY68pu4k2GSSEnVyTAqRC4Ps3pNS0uS3UJb8Gtk81XkevV3C/JJBMY/zhqRvXAqj6/eAXNVY2/yNHN7tB30vF27XrG1qEMh68ntku0KG1uGnWSSbXXlwW//+DD78FVuez+mbA8K2LAmzhyiTIionMjbZvnlLv3 luc@dirict.nl"
+        }
+    },
+    "profile_apache::office_server_name": "rely-acc.notarisdossier.nl",
+    "profile_apache::office_server_alias": "%{fqdn}",
+    "profile_apache::office_document_root": "/home/notarisdossier/application/current/frontends/office/public/",
+    "profile_apache::office_error_log": "office_error.log",
+    "profile_apache::office_access_log": "office_access.log",
+    "profile_apache::client_server_name": "wildcard.notarisdossier.nl",
+    "profile_apache::client_server_alias": "*.notarisdossier.nl",
+    "profile_apache::client_document_root": "/home/notarisdossier/application/current/frontends/client/public/",
+    "profile_apache::client_error_log": "client_error_log.log",
+    "profile_apache::client_access_log": "client_access.log",
+    "profile_apache::log_level": "info",
+    "profile_apache::server_admin": "webmaster@notarisdossier.nl",
+    "profile_apache::nfs_mountpoint": "/mnt/templates",
+    "profile_apache::ssl_cert": "/etc/ssl/certs/star_notarisdossier_nl.crt",
+    "profile_apache::ssl_key": "/etc/ssl/private/star_notarisdossier_nl.key",
+    "profile_apache::ssl_chain": "/etc/ssl/certs/Comodo_PositiveSSL_bundle.crt",
+    "profile_apache::dirict_username": "dirict",
+    "profile_apache::dirict_password": "changeme",
+    "profile_apache::azure_account": "ndtest",
+    "profile_apache::azure_access_key": "changeme",
+    "profile_apache::webservices_dirict_username": "User",
+    "profile_apache::webservices_dirict_password": "changeme",
+    "profile_apache::webdav_dirict_templates_password": "changeme"
+}
