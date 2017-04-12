@@ -30,8 +30,6 @@ echo "Write customer hieradata"
 echo '${file("customer.json")}' > "/etc/puppetlabs/code/environments/production/hieradata/customer.json"
 
 echo "Write pem file"
-# echo '${file("star_notarisdossier_nl.pem")}' > "/etc/ssl/private/star_notarisdossier_nl.pem"
-# chmod 644 /etc/ssl/private/star_notarisdossier_nl.pem
 
 
 echo "Bootstrap puppet and apply role"
