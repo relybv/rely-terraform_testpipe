@@ -23,7 +23,7 @@ node {
          withCredentials([usernamePassword(credentialsId: 'OS_CERT', passwordVariable: 'TF_VAR_password', usernameVariable: 'TF_VAR_user_name')]) {
             stage('Provisioning') 
             {
-               if (fileExists('file')) {
+               if (fileExists('$HOME/.ssh/id_rsa')) {
                  echo 'Skip ssh-keygen'
                } else {
                  sh "ssh-keygen -f $HOME/.ssh/id_rsa -t rsa -N ''"
