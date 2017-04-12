@@ -1,5 +1,5 @@
 output "loadurl" {
-  value = "http://blazedemo.com/"
+  value = "http://${openstack_compute_floatingip_v2.lb.address}/"
 }
 
 output "1a. Configuratie overzicht" {

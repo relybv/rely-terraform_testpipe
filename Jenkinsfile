@@ -24,11 +24,13 @@ node {
             stage('Provisioning') 
             {
                sh "TF_VAR_environment=${env.BUILD_NUMBER} /usr/local/bin/terraform plan -no-color | tee TFPLAN.md"
-//               sh "TF_VAR_environment=${env.BUILD_NUMBER} /usr/local/bin/terraform apply -no-color | tee TFEXEC.md"
+               sh "TF_VAR_environment=${env.BUILD_NUMBER} /usr/local/bin/terraform apply -no-color | tee TFEXEC.md"
             }
             stage('Performance tests')
             {
+               // replace PERFTARGET in load.yml using loadurl output from terraform
                sh 'perftarget=$(/usr/local/bin/terraform output loadurl -no-color); sed -ie "s,PERFTARGET,$perftarget,g" perftests/load.yml'
+               // start load tests
                sh 'bzt perftests/load.yml -o settings.artifacts-dir="${WORKSPACE}/perftests/output/"'
                step([$class: 'JUnitResultArchiver', testResults: 'perf-junit.xml'])
                junit 'perf-junit.xml'
