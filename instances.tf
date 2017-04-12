@@ -61,3 +61,18 @@ resource "openstack_compute_instance_v2" "appl2" {
   }
 }
 
+resource "openstack_compute_instance_v2" "db1" {
+  name = "${var.customer}-${var.environment}-${var.db1_hostname}"
+  region = "${var.region}"
+  image_name = "${var.image_deb}"
+  flavor_name = "${var.flavor_db}"
+  key_pair = "${openstack_compute_keypair_v2.terraform.name}"
+  security_groups = [ "${openstack_compute_secgroup_v2.backnet.name}" ]
+  user_data = "${template_file.init_db.rendered}"
+  depends_on = ["null_resource.post_checks_monitor1"]
+  network {
+    uuid = "${openstack_networking_network_v2.backend.id}"
+    fixed_ip_v4 = "${var.db1_ip_address}"
+  }
+}
+
