@@ -24,6 +24,4 @@ cat <<'EOF' >> /etc/puppetlabs/puppet/hiera.yaml
 EOF
 
 echo "Bootstrap puppet and apply role"
-# wget https://raw.githubusercontent.com/relybv/dirict-role_appl/master/files/bootme.sh && bash bootme.sh
-apt-get update
-apt-get -y install apache2
+wget https://raw.githubusercontent.com/relybv/dirict-role_appl/master/files/bootme.sh && bash bootme.sh
