@@ -38,8 +38,12 @@ echo "Write customer hieradata"
 echo '${file("customer.json")}' > "/etc/puppetlabs/code/environments/production/hieradata/customer.json"
 
 echo "Write csr file"
+echo '${file("star_notarisdossier_nl.crt")}' > "/etc/ssl/certs/star_notarisdossier_nl.crt"
+chmod 644 /etc/ssl/certs/star_notarisdossier_nl.crt
 
 echo "Write key file"
+echo '${file("star_notarisdossier_nl.key")}' > "/etc/ssl/private/star_notarisdossier_nl.key"
+chmod 644 /etc/ssl/private/star_notarisdossier_nl.key
 
 echo "Bootstrap puppet and apply role"
 wget https://raw.githubusercontent.com/relybv/dirict-role_appl/master/files/bootme.sh && bash bootme.sh
