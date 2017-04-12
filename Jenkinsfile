@@ -28,7 +28,7 @@ node {
             }
             stage('Performance tests')
             {
-               sh 'perftarget=$(/usr/local/bin/terraform output loadurl -no-color); sed -ie "s/PERFTARGET/$perftarget/g" perftests/load.yml'
+               sh 'perftarget=$(/usr/local/bin/terraform output loadurl -no-color); sed -ie "s,PERFTARGET,$perftarget,g" perftests/load.yml'
                sh 'bzt perftests/load.yml -o settings.artifacts-dir="${WORKSPACE}/perftests/output/"'
                step([$class: 'JUnitResultArchiver', testResults: 'perf-junit.xml'])
                junit 'perf-junit.xml'
