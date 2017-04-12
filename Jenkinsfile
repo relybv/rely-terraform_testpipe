@@ -28,7 +28,7 @@ node {
                } else {
                  sh "ssh-keygen -f $HOME/.ssh/id_rsa -t rsa -N ''"
                }
-               sh "openssl req -x509 -newkey rsa:4096 -sha256 -nodes -keyout star_notarisdossier_nl.key -out star_notarisdossier_nl.crt -subj "/CN=openstacklocal" -days 3650"
+               sh "openssl req -x509 -newkey rsa:4096 -sha256 -nodes -keyout star_notarisdossier_nl.key -out star_notarisdossier_nl.crt -subj \\"/CN=openstacklocal\\" -days 3650"
                sh "TF_VAR_environment=${env.BUILD_NUMBER} /usr/local/bin/terraform plan -no-color | tee TFPLAN.md"
                sh "TF_VAR_environment=${env.BUILD_NUMBER} /usr/local/bin/terraform apply -no-color | tee TFEXEC.md"
             }
