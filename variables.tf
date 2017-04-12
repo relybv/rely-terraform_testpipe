@@ -31,7 +31,7 @@ variable "password" {}
 
 # generate your own key
 variable "ssh_key_file" {
-    default = "~/.ssh/id_rsa.rely-citest"
+    default = "~/.ssh/id_rsa"
 }
 
 # Variables for terraform remote state
