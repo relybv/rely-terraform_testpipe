@@ -5,6 +5,7 @@ execution:
 scenarios:
   simple:
     requests:
+     - PERFTARGET
 
 reporting:
 - module: final-stats
