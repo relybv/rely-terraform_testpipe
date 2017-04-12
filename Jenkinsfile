@@ -28,7 +28,7 @@ node {
             }
             stage('Performance tests')
             {
-               sh '/usr/local/bin/terraform output loadurl -no-color'
+               sh 'perftarget=$(/usr/local/bin/terraform output loadurl -no-color)'
                sh 'bzt perftests/load.yml -o settings.artifacts-dir="${WORKSPACE}/perftests/output/" -o scenarios.simple.requests=\'["http://blazedemo.com/"]\''
                step([$class: 'JUnitResultArchiver', testResults: 'perf-junit.xml'])
                junit 'perf-junit.xml'
