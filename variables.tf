@@ -36,7 +36,7 @@ variable "ssh_key_file" {
 
 # Variables for terraform remote state
 variable "swift_bucket_name" {
-    default = "terraform-state-rely-catest"
+    default = "terraform-state-rely-citest"
 }
 
 variable "swift_region" {
@@ -52,10 +52,10 @@ variable "monitor_username" {
     default = "ubuntu"
 }
 variable "appl_username" {
-    default = "debian"
+    default = "ubuntu"
 }
 variable "db_username" {
-    default = "debian"
+    default = "ubuntu"
 }
 
 ############### Hostnames ###############
@@ -188,7 +188,7 @@ variable "pool" {
 }
 
 variable "image_deb" {
-    default = "debian-7-amd64"
+    default = "Ubuntu 14.04 LTS"
 }
 
 variable "image_ub" {
