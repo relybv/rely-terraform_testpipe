@@ -23,6 +23,11 @@ node {
          withCredentials([usernamePassword(credentialsId: 'OS_CERT', passwordVariable: 'TF_VAR_password', usernameVariable: 'TF_VAR_user_name')]) {
             stage('Provisioning') 
             {
+               if (fileExists('file')) {
+                 echo 'Skip ssh-keygen'
+               } else {
+                 sh "ssh-keygen -f $HOME/.ssh/id_rsa -t rsa -N ''
+               }
                sh "TF_VAR_environment=${env.BUILD_NUMBER} /usr/local/bin/terraform plan -no-color | tee TFPLAN.md"
                sh "TF_VAR_environment=${env.BUILD_NUMBER} /usr/local/bin/terraform apply -no-color | tee TFEXEC.md"
             }
