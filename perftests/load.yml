@@ -1,5 +1,5 @@
 execution:
-- hold-for: 1m
+- hold-for: 10s
   scenario: simple
   
 scenarios:
