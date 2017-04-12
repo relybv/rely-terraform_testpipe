@@ -53,4 +53,6 @@ node {
    archiveArtifacts '*.md'
    archiveArtifacts '*.png'
    perfReport 'perf-plot.xml'
+   step <object of type hudson.plugins.performance.PerformancePublisher>
+
 }
