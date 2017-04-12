@@ -19,7 +19,7 @@ node {
          sh '/usr/local/bin/terraform-docs markdown ./ | tee TF.md'
          sh 'terraform graph | dot -Tpng > graph.png'
       }
-      withEnv([ perftarget=$(/usr/local/bin/terraform output loadurl -no-color) , 'OS_AUTH_URL=https://access.openstack.rely.nl:5000/v2.0', 'OS_TENANT_ID=10593dbf4f8d4296a25cf942f0567050', 'OS_TENANT_NAME=lab', 'OS_PROJECT_NAME=lab', 'OS_REGION_NAME=RegionOne']) {
+      withEnv(['OS_AUTH_URL=https://access.openstack.rely.nl:5000/v2.0', 'OS_TENANT_ID=10593dbf4f8d4296a25cf942f0567050', 'OS_TENANT_NAME=lab', 'OS_PROJECT_NAME=lab', 'OS_REGION_NAME=RegionOne']) {
          withCredentials([usernamePassword(credentialsId: 'OS_CERT', passwordVariable: 'TF_VAR_password', usernameVariable: 'TF_VAR_user_name')]) {
             stage('Provisioning') 
             {
@@ -29,7 +29,7 @@ node {
             stage('Performance tests')
             {
                // sh 'perftarget=$(/usr/local/bin/terraform output loadurl -no-color)'
-               sh 'echo $perftarget; bzt perftests/load.yml -o settings.artifacts-dir="${WORKSPACE}/perftests/output/" -o scenarios.simple.requests=\'["http://blazedemo.com/"]\''
+               sh 'perftarget=$(/usr/local/bin/terraform output loadurl -no-color); echo $perftarget; bzt perftests/load.yml -o settings.artifacts-dir="${WORKSPACE}/perftests/output/" -o scenarios.simple.requests=\'["http://blazedemo.com/"]\''
                step([$class: 'JUnitResultArchiver', testResults: 'perf-junit.xml'])
                junit 'perf-junit.xml'
             }
