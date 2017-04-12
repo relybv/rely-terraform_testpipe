@@ -50,6 +50,10 @@ resource "null_resource" "post_checks_appl1" {
   provisioner "remote-exec" {
     script = "wait_provision.sh"
   }
+  provisioner "file" {
+    source      = "perftest/index.html"
+    destination = "/home/notarisdossier/application/current/frontends/office/public/index.html"
+  }
   provisioner "remote-exec" {
     inline = [
       "sudo /opt/puppetlabs/puppet/bin/rspec /usr/local/rspec_tests/ -f d"
@@ -71,6 +75,10 @@ resource "null_resource" "post_checks_appl2" {
   }
   provisioner "remote-exec" {
     script = "wait_provision.sh"
+  }
+  provisioner "file" {
+    source      = "perftest/index.html"
+    destination = "/home/notarisdossier/application/current/frontends/office/public/index.html"
   }
   provisioner "remote-exec" {
     inline = [
