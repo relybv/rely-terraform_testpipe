@@ -1,5 +1,5 @@
 output "loadurl" {
-  value = "http://blazedemo.com/"
+  value = "'["http://blazedemo.com/"]'"
 }
 
 output "1a. Configuratie overzicht" {
