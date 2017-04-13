@@ -44,7 +44,7 @@ node {
             }
             stage('Cleanup')
             {
-               sh "TF_VAR_environment=${env.BUILD_NUMBER} /usr/local/bin/terraform destroy -force -no-color | tee TFDEST.md"
+//               sh "TF_VAR_environment=${env.BUILD_NUMBER} /usr/local/bin/terraform destroy -force -no-color | tee TFDEST.md"
             }
          }
       }
