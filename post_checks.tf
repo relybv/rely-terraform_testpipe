@@ -56,7 +56,7 @@ resource "null_resource" "post_checks_appl1" {
   }
   provisioner "remote-exec" {
     inline = [
-      "sudo cp /tmp/index.html /home/notarisdossier/application/current/frontends/client/public/index.html"
+      "sudo cp /tmp/index.html /home/notarisdossier/redirect/index.html"
     ]
   }
   provisioner "remote-exec" {
@@ -87,7 +87,7 @@ resource "null_resource" "post_checks_appl2" {
   }
   provisioner "remote-exec" {
     inline = [
-      "sudo cp /tmp/index.html /home/notarisdossier/application/current/frontends/client/public/index.html"
+      "sudo cp /tmp/index.html /home/notarisdossier/redirect/index.html"
     ]
   }
   provisioner "remote-exec" {
