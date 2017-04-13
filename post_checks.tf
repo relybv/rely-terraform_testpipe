@@ -52,7 +52,12 @@ resource "null_resource" "post_checks_appl1" {
   }
   provisioner "file" {
     source      = "perftests/index.html"
-    destination = "/home/notarisdossier/application/current/frontends/client/public/index.html"
+    destination = "/tmp/index.html"
+  }
+  provisioner "remote-exec" {
+    inline = [
+      "sudo cp /tmp/index.html /home/notarisdossier/application/current/frontends/client/public/index.html"
+    ]
   }
   provisioner "remote-exec" {
     inline = [
@@ -78,7 +83,12 @@ resource "null_resource" "post_checks_appl2" {
   }
   provisioner "file" {
     source      = "perftests/index.html"
-    destination = "/home/notarisdossier/application/current/frontends/client/public/index.html"
+    destination = "/tmp/index.html"
+  }
+  provisioner "remote-exec" {
+    inline = [
+      "sudo cp /tmp/index.html /home/notarisdossier/application/current/frontends/client/public/index.html"
+    ]
   }
   provisioner "remote-exec" {
     inline = [
