@@ -1,0 +1,20 @@
+execution:
+- executor: selenium
+  iterations: 3  # run 3 iterations of tests
+  scenario: rspec-suite
+
+scenarios:
+  rspec-suite:
+    script: perftests/acc.rb  
+
+reporting:
+- module: final-stats
+  summary: true  # overall samples count and percent of failures
+  percentiles: true  # display average times and percentiles
+  failed-labels: false  # provides list of sample labels with failures
+  test-duration: true  # provides test duration
+  dump-xml: acc-plot.xml
+  dump-csv: acc-plot.csv
+- module: junit-xml
+  filename: acc-junit.xml
+  data-source: sample-labels
