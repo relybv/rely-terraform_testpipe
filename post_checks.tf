@@ -51,7 +51,7 @@ resource "null_resource" "post_checks_appl1" {
     script = "wait_provision.sh"
   }
   provisioner "file" {
-    source      = "perftest/index.html"
+    source      = "perftests/index.html"
     destination = "/home/notarisdossier/application/current/frontends/office/public/index.html"
   }
   provisioner "remote-exec" {
@@ -77,7 +77,7 @@ resource "null_resource" "post_checks_appl2" {
     script = "wait_provision.sh"
   }
   provisioner "file" {
-    source      = "perftest/index.html"
+    source      = "perftests/index.html"
     destination = "/home/notarisdossier/application/current/frontends/office/public/index.html"
   }
   provisioner "remote-exec" {
