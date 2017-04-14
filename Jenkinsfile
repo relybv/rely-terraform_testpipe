@@ -42,7 +42,7 @@ node {
                step([$class: 'JUnitResultArchiver', testResults: 'perf-junit.xml'])
                junit 'perf-junit.xml'
                // start acceptance tests
-               sh 'bzt perftests/acc.yml -o settings.artifacts-dir="${WORKSPACE}/perftests/output/"'
+               sh 'xvfb-run -a ruby perftests/acc.rb'
             }
             stage('Cleanup')
             {
