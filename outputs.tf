@@ -11,6 +11,9 @@ output "1b. Klantnaam" {
 output "1c. Omgevingsnaam" {
     value = "${var.environment}"
 }
+output "2a. Grafana url" {
+    value = "http://${openstack_compute_floatingip_v2.monitor.address}:8080"
+}
 output "2b. Load balancer publiek IP" {
     value = "${openstack_compute_floatingip_v2.lb.address}"
 }
