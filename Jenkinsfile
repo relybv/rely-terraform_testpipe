@@ -36,7 +36,7 @@ node {
             stage('Performance tests')
             {
                // replace PERFTARGET in *.yml using loadurl output from terraform
-               sh 'perftarget=$(/usr/local/bin/terraform output loadurl -no-color); sed -ie "s,PERFTARGET,$perftarget,g" perftests/*.yml'
+               sh 'perftarget=$(/usr/local/bin/terraform output loadurl -no-color); sed -ie "s,PERFTARGET,$perftarget,g" perftests/*.yml; sed -ie "s,PERFTARGET,$perftarget,g" perftests/*.rb'
                // start load tests
                sh 'bzt perftests/load.yml -o settings.artifacts-dir="${WORKSPACE}/perftests/output/"'
                step([$class: 'JUnitResultArchiver', testResults: 'perf-junit.xml'])
@@ -45,8 +45,6 @@ node {
             }
             stage('Acceptance tests')
             {
-               // replace PERFTARGET in *.rb using loadurl output from terraform
-               sh 'perftarget=$(/usr/local/bin/terraform output loadurl -no-color); sed -ie "s,PERFTARGET,$perftarget,g" perftests/*.rb'
                // start acceptance tests
                sh 'xvfb-run -a ruby perftests/acc.rb'
             }
