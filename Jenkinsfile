@@ -46,6 +46,13 @@ node {
                sh 'perftarget=$(/usr/local/bin/terraform output loadurl -no-color); sed -ie "s,PERFTARGET,$perftarget,g" perftests/*.rb'
                sh 'xvfb-run -a ruby perftests/acc.rb'
             }
+            stage('Acceptance tests')
+            {
+               // replace PERFTARGET in *.rb using loadurl output from terraform
+               sh 'perftarget=$(/usr/local/bin/terraform output loadurl -no-color); sed -ie "s,PERFTARGET,$perftarget,g" perftests/*.rb'
+               // start acceptance tests
+               sh 'xvfb-run -a ruby perftests/acc.rb'
+            }
             stage('Cleanup')
             {
                sh "TF_VAR_environment=${env.BUILD_NUMBER} /usr/local/bin/terraform destroy -force -no-color | tee TFDEST.md"
