@@ -42,6 +42,8 @@ node {
                step([$class: 'JUnitResultArchiver', testResults: 'perf-junit.xml'])
                junit 'perf-junit.xml'
                // start acceptance tests
+               // replace PERFTARGET in *.rb using loadurl output from terraform
+               sh 'perftarget=$(/usr/local/bin/terraform output loadurl -no-color); sed -ie "s,PERFTARGET,$perftarget,g" perftests/*.rb'
                sh 'xvfb-run -a ruby perftests/acc.rb'
             }
             stage('Cleanup')

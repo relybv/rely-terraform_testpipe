@@ -5,6 +5,10 @@ include RSpec::Matchers
 
 driver = Selenium::WebDriver.for :chrome
 
+driver.get 'http://PERFTARGET'
+driver.page_source.should include 'the quick brown fox'
+driver.save_screenshot 'loadbalancer.png'
+puts "Page title is #{driver.title}"
 
 driver.get 'https://paars.notarisdossier.nl'
 expect(driver.title).to eql 'Let op - Notarisdossier'
