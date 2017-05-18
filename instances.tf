@@ -41,7 +41,7 @@ resource "openstack_compute_instance_v2" "appl1" {
   key_pair = "${openstack_compute_keypair_v2.terraform.name}"
   security_groups = [ "${openstack_compute_secgroup_v2.frontnet.name}" ]
   user_data = "${data.template_file.init_appl.rendered}"
-  depends_on = ["openstack_compute_instance_v2.db1"]
+  depends_on = ["null_resource.post_checks_db1"]
   network {
     uuid = "${openstack_networking_network_v2.frontend.id}"
     fixed_ip_v4 = "${var.appl1_ip_address}"
@@ -56,7 +56,7 @@ resource "openstack_compute_instance_v2" "appl2" {
   key_pair = "${openstack_compute_keypair_v2.terraform.name}"
   security_groups = [ "${openstack_compute_secgroup_v2.frontnet.name}" ]
   user_data = "${data.template_file.init_appl.rendered}"
-  depends_on = ["openstack_compute_instance_v2.db1"]
+  depends_on = ["null_resource.post_checks_db1"]
   network {
     uuid = "${openstack_networking_network_v2.frontend.id}"
     fixed_ip_v4 = "${var.appl2_ip_address}"
