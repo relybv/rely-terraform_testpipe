@@ -195,6 +195,10 @@ variable "image_ub" {
     default = "Ubuntu 14.04 LTS"
 }
 
+variable "image_mon" {
+    default = "Ubuntu 16.04 LTS"
+}
+
 variable "image_win" {
     default = "Windows Server 2012 R2 Std Eval"
 }

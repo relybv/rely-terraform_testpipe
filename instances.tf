@@ -6,7 +6,7 @@ resource "openstack_compute_servergroup_v2" "appl" {
 resource "openstack_compute_instance_v2" "monitor1" {
   name = "${var.customer}-${var.environment}-${var.monitor1_hostname}"
   region = "${var.region}"
-  image_name = "${var.image_ub}"
+  image_name = "${var.image_mon}"
   flavor_name = "${var.flavor_mon}"
   key_pair = "${openstack_compute_keypair_v2.terraform.name}"
   security_groups = [ "${openstack_compute_secgroup_v2.monitor.name}" ]
