@@ -1,4 +1,5 @@
 #!/bin/bash
+export FACTER_monitor_address="localhost"
 
 echo "Create hiera directories"
 mkdir -p /etc/puppetlabs/puppet
