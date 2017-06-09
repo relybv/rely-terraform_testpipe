@@ -136,6 +136,12 @@ resource "openstack_compute_secgroup_v2" "monitor" {
     cidr = "0.0.0.0/0"
   }
   rule {
+    from_port = 4440
+    to_port = 4440
+    ip_protocol = "tcp"
+    cidr = "0.0.0.0/0"
+  }
+  rule {
     from_port = 3000
     to_port = 3000
     ip_protocol = "tcp"
