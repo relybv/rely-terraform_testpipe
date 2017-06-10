@@ -17,7 +17,10 @@ output "2a. Kibana url" {
 output "2b. Grafana url" {
     value = "http://${openstack_compute_floatingip_v2.monitor.address}:3000"
 }
-output "2c. Load balancer publiek IP" {
+output "2b. Rundeck url" {
+    value = "http://${openstack_compute_floatingip_v2.monitor.address}:4440"
+}
+output "2d. Load balancer publiek IP" {
     value = "${openstack_compute_floatingip_v2.lb.address}"
 }
 output "3a. Jump host publiek IP" {
