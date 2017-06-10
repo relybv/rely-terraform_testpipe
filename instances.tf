@@ -71,7 +71,7 @@ resource "openstack_compute_instance_v2" "db1" {
   key_pair = "${openstack_compute_keypair_v2.terraform.name}"
   security_groups = [ "${openstack_compute_secgroup_v2.backnet.name}" ]
   user_data = "${data.template_file.init_db.rendered}"
-  depends_on = ["null_resource.post_checks_monitor1"]
+#  depends_on = ["null_resource.post_checks_monitor1"]
   network {
     uuid = "${openstack_networking_network_v2.backend.id}"
     fixed_ip_v4 = "${var.db1_ip_address}"
