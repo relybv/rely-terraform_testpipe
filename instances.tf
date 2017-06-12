@@ -27,7 +27,7 @@ resource "openstack_compute_instance_v2" "lb1" {
   security_groups = [ "${openstack_compute_secgroup_v2.lb.name}" ]
   floating_ip = "${openstack_compute_floatingip_v2.lb.address}"
   user_data = "${data.template_file.init_lb.rendered}"
-  depends_on = ["null_resource.post_checks_monitor11"]
+  depends_on = ["null_resource.post_checks_monitor1"]
   network {
     uuid = "${openstack_networking_network_v2.frontend.id}"
     fixed_ip_v4 = "${var.lb1_ip_address}"
