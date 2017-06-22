@@ -41,6 +41,7 @@ node {
                sh 'bzt perftests/load.yml -o settings.artifacts-dir="${WORKSPACE}/perftests/output/"'
                step([$class: 'JUnitResultArchiver', testResults: 'perf-junit.xml'])
                junit 'perf-junit.xml'
+               perfReport 'perf-plot.xml'
             }
             stage('Acceptance tests')
             {
@@ -64,6 +65,5 @@ node {
    archiveArtifacts '*.log'
    archiveArtifacts '*.png'
    archiveArtifacts '*.html'
-   perfReport 'perf-plot.xml'
 
 }
