@@ -9,7 +9,7 @@ node {
       }
       stage('Dependencies') {
          sh 'cd $WORKSPACE'
-         sh 'mkdir doc'
+         sh 'mkdir -p doc'
       }
       stage('Code quality') {
          sh '/usr/local/bin/terraform validate > TF_validate.log'
