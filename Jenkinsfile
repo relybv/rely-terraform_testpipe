@@ -37,6 +37,8 @@ node {
             {
                // replace PERFTARGET in *.yml using loadurl output from terraform
                sh 'perftarget=$(/usr/local/bin/terraform output loadurl -no-color); sed -ie "s,PERFTARGET,$perftarget,g" perftests/*.yml; sed -ie "s,PERFTARGET,$perftarget,g" perftests/*.rb'
+               // replace GRAFANATARGET in *.yml using 'Grafana url' output from terraform
+               sh 'perftarget=$(/usr/local/bin/terraform output 'Grafana url' -no-color); sed -ie "s,GRAFANATARGET,$perftarget,g" perftests/*.rb'
                // start load tests
                sh 'bzt perftests/load.yml -o settings.artifacts-dir="${WORKSPACE}/perftests/output/"'
                step([$class: 'JUnitResultArchiver', testResults: 'perf-junit.xml'])

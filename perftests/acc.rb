@@ -10,9 +10,9 @@ driver.page_source.include? 'The quick brown fox'
 driver.save_screenshot 'loadbalancer.png'
 puts "Page title is #{driver.title}"
 
-driver.get 'https://paars.notarisdossier.nl'
-expect(driver.title).to eql 'Let op - Notarisdossier'
-driver.save_screenshot 'notarisdosssier.png'
+driver.get 'GRAFANATARGET'
+# expect(driver.title).to eql 'Let op - Notarisdossier'
+driver.save_screenshot 'grafana.png'
 puts "Page title is #{driver.title}"
 
 driver.get "http://google.com"

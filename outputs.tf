@@ -3,7 +3,7 @@ output "loadurl" {
 }
 
 output "1a. Configuratie overzicht" {
-  value = "Versie 1.0"
+  value = "Versie 2.0"
 }
 output "1b. Klantnaam" {
     value = "${var.customer}"
@@ -11,13 +11,13 @@ output "1b. Klantnaam" {
 output "1c. Omgevingsnaam" {
     value = "${var.environment}"
 }
-output "2a. Kibana url" {
+output "Kibana url" {
     value = "http://${openstack_compute_floatingip_v2.monitor.address}:8080"
 }
-output "2b. Grafana url" {
+output "Grafana url" {
     value = "http://${openstack_compute_floatingip_v2.monitor.address}:3000"
 }
-output "2b. Rundeck url" {
+output "Rundeck url" {
     value = "http://${openstack_compute_floatingip_v2.monitor.address}:4440"
 }
 output "2d. Load balancer publiek IP" {
