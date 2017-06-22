@@ -11,13 +11,13 @@ node {
          sh 'cd $WORKSPACE'
       }
       stage('Code quality') {
-         parallel (
-            validate: { sh '/usr/local/bin/terraform validate' }
-         )
+         sh '/usr/local/bin/terraform validate > TF_validate.log'
       }
       stage('Documentation') {
-         sh '/usr/local/bin/terraform-docs markdown ./ | tee TF.md'
-         sh 'terraform graph | dot -Tpng > graph.png'
+         sh '/usr/local/bin/terraform-docs markdown ./ > TF_documentation.md'
+         sh 'pandoc TF_documentation.md -f markdown -t html -s -o TF_documentation.html'
+         publishHTML([allowMissing: false, alwaysLinkToLastBuild: true, keepAll: false, reportDir: 'doc', reportFiles: 'TF_documentation.html', reportName: 'HTML Documentation'])
+         sh 'terraform graph | dot -Tpng > TF_dependencie_graph.png'
       }
       withEnv(['OS_AUTH_URL=https://access.openstack.rely.nl:5000/v2.0', 'OS_TENANT_ID=10593dbf4f8d4296a25cf942f0567050', 'OS_TENANT_NAME=lab', 'OS_PROJECT_NAME=lab', 'OS_REGION_NAME=RegionOne']) {
          withCredentials([usernamePassword(credentialsId: 'OS_CERT', passwordVariable: 'TF_VAR_password', usernameVariable: 'TF_VAR_user_name')]) {
@@ -30,8 +30,7 @@ node {
                }
                sh "openssl req -x509 -newkey rsa:4096 -sha256 -nodes -keyout star_notarisdossier_nl.key -out star_notarisdossier_nl.crt -subj \"/CN=openstacklocal\" -days 3650"
                sh "cat star_notarisdossier_nl.crt star_notarisdossier_nl.key > star_notarisdossier_nl.pem"
-               sh "TF_VAR_environment=${env.BUILD_NUMBER} /usr/local/bin/terraform plan -no-color | tee TFPLAN.md"
-               sh "TF_VAR_environment=${env.BUILD_NUMBER} /usr/local/bin/terraform apply -no-color | tee TFEXEC.md"
+               sh "TF_VAR_environment=${env.BUILD_NUMBER} /usr/local/bin/terraform apply -no-color > TF_apply.log"
             }
             stage('Performance tests')
             {
@@ -49,14 +48,15 @@ node {
             }
             stage('Cleanup')
             {
-               sh "TF_VAR_environment=${env.BUILD_NUMBER} /usr/local/bin/terraform destroy -force -no-color | tee TFDEST.md"
+               sh "TF_VAR_environment=${env.BUILD_NUMBER} /usr/local/bin/terraform destroy -force -no-color > TF_destroy.log"
             }
          }
       }
    }
 
-   archiveArtifacts '*.md'
+   archiveArtifacts '*.log'
    archiveArtifacts '*.png'
+   archiveArtifacts '*.html'
    perfReport 'perf-plot.xml'
 
 }
