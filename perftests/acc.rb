@@ -11,8 +11,18 @@ driver.save_screenshot 'loadbalancer.png'
 puts "Page title is #{driver.title}"
 
 driver.get 'GRAFANATARGET'
-# expect(driver.title).to eql 'Let op - Notarisdossier'
+expect(driver.title).to eql 'Grafana'
 driver.save_screenshot 'grafana.png'
+puts "Page title is #{driver.title}"
+
+driver.get 'KIBANATARGET'
+# expect(driver.title).to eql 'Kibana'
+driver.save_screenshot 'kibana.png'
+puts "Page title is #{driver.title}"
+
+driver.get 'RUNDECKTARGET'
+# expect(driver.title).to eql 'Rundeck'
+driver.save_screenshot 'rundeck.png'
 puts "Page title is #{driver.title}"
 
 driver.get "http://google.com"
