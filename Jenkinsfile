@@ -9,14 +9,15 @@ node {
       }
       stage('Dependencies') {
          sh 'cd $WORKSPACE'
+         sh 'mkdir doc'
       }
       stage('Code quality') {
          sh '/usr/local/bin/terraform validate > TF_validate.log'
       }
       stage('Documentation') {
          sh '/usr/local/bin/terraform-docs markdown ./ > TF_documentation.md'
-         sh 'pandoc TF_documentation.md -f markdown -t html -s -o TF_documentation.html'
-         publishHTML([allowMissing: false, alwaysLinkToLastBuild: true, keepAll: false, reportDir: './', reportFiles: 'TF_documentation.html', reportName: 'HTML Documentation'])
+         sh 'pandoc TF_documentation.md -f markdown -t html -s -o doc/TF_documentation.html'
+         publishHTML([allowMissing: false, alwaysLinkToLastBuild: true, keepAll: false, reportDir: 'doc', reportFiles: 'TF_documentation.html', reportName: 'HTML Documentation'])
          sh 'terraform graph | dot -Tpng > TF_dependencie_graph.png'
       }
       withEnv(['OS_AUTH_URL=https://access.openstack.rely.nl:5000/v2.0', 'OS_TENANT_ID=10593dbf4f8d4296a25cf942f0567050', 'OS_TENANT_NAME=lab', 'OS_PROJECT_NAME=lab', 'OS_REGION_NAME=RegionOne']) {
