@@ -11,13 +11,13 @@ output "1b. Klantnaam" {
 output "1c. Omgevingsnaam" {
     value = "${var.environment}"
 }
-output "Kibana url" {
+output "kibanaurl" {
     value = "http://${openstack_compute_floatingip_v2.monitor.address}:8080"
 }
-output "Grafana url" {
+output "grafanaurl" {
     value = "http://${openstack_compute_floatingip_v2.monitor.address}:3000"
 }
-output "Rundeck url" {
+output "rundeckurl" {
     value = "http://${openstack_compute_floatingip_v2.monitor.address}:4440"
 }
 output "2d. Load balancer publiek IP" {
