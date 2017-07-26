@@ -64,6 +64,6 @@ node {
 
    archiveArtifacts '*.log'
    archiveArtifacts '*.png'
-   archiveArtifacts '*.html'
+   archiveArtifacts 'perftests/*.html'
 
 }
