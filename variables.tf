@@ -216,7 +216,7 @@ variable "flavor_db" {
 }
 
 variable "flavor_mon" {
-    default = "ha_localdisk.4c.8r.60h"
+    default = "ha_localdisk.4c.16r.60h"
 }
 
 variable "flavor_win" {
