@@ -10,11 +10,11 @@ driver.page_source.include? 'The quick brown fox'
 driver.save_screenshot 'loadbalancer.png'
 puts "Page title is #{driver.title}"
 
-driver.get 'GRAFANATARGET'
+driver.get 'GRAFANATARGET/login'
 expect(driver.title).to eql 'Grafana'
 driver.save_screenshot 'grafana_start.png'
-driver.find_element(:name, "User").send_keys("admin")
-driver.find_element(:name, "Password").send_keys("admin")
+driver.find_element(:name, "user").send_keys("admin")
+driver.find_element(:name, "password").send_keys("admin")
 driver.find_element(:css, "div.form-actions > button").click
 driver.save_screenshot 'grafana_login.png'
 puts "Page title is #{driver.title}"
