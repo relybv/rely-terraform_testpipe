@@ -13,9 +13,9 @@ puts "Page title is #{driver.title}"
 driver.get 'GRAFANATARGET'
 expect(driver.title).to eql 'Grafana'
 driver.save_screenshot 'grafana_start.png'
-browser.login_username.send_keys('admin')
-browser.login_password.send_keys('admin')
-browser.submit_button.click
+driver.login_username.send_keys('admin')
+driver.login_password.send_keys('admin')
+driver.submit_button.click
 driver.save_screenshot 'grafana_login.png'
 puts "Page title is #{driver.title}"
 driver.get 'GRAFANATARGET/dashboard/db/haproxy-metrics?refresh=5s&orgId=1&from=now-5m&to=now'
