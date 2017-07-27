@@ -15,7 +15,7 @@ expect(driver.title).to eql 'Grafana'
 driver.save_screenshot 'grafana_start.png'
 driver.find_element(:name, "username").send_keys("admin")
 driver.find_element(:name, "password").send_keys("admin")
-driver.find_element_by_xpath("//input[@type='submit']").click()
+driver.find_element(:xpath, "//input[@type='submit']").click()
 driver.save_screenshot 'grafana_login.png'
 puts "Page title is #{driver.title}"
 driver.get 'GRAFANATARGET/dashboard/db/haproxy-metrics?refresh=5s&orgId=1&from=now-5m&to=now'
