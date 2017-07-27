@@ -13,7 +13,7 @@ puts "Page title is #{driver.title}"
 driver.get 'GRAFANATARGET/login'
 expect(driver.title).to eql 'Grafana'
 driver.save_screenshot 'grafana_start.png'
-driver.find_element(:name, "user").send_keys("admin")
+driver.find_element(:name, "username").send_keys("admin")
 driver.find_element(:name, "password").send_keys("admin")
 driver.find_element(:css, "div.form-actions > button").click
 driver.save_screenshot 'grafana_login.png'
