@@ -6,6 +6,7 @@ include RSpec::Matchers
 driver = Selenium::WebDriver.for :chrome
 
 driver.get 'PERFTARGET'
+driver.manage.window.maximize
 driver.page_source.include? 'The quick brown fox'
 driver.save_screenshot 'loadbalancer.png'
 puts "Page title is #{driver.title}"
