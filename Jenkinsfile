@@ -52,7 +52,7 @@ node {
                sh 'perftarget=$(/usr/local/bin/terraform output kibanaurl -no-color); sed -ie "s,KIBANATARGET,$perftarget,g" perftests/*.rb'
                // replace RUBDECKTARGET in *.yml using 'Rundeck url' output from terraform
                sh 'perftarget=$(/usr/local/bin/terraform output rundeckurl -no-color); sed -ie "s,RUNDECKTARGET,$perftarget,g" perftests/*.rb'
-               sh 'xvfb-run -a ruby perftests/acc.rb'
+               sh 'xvfb-run --server-args="-screen 0 1920x1080x24" -a ruby perftests/acc.rb'
             }
             stage('Cleanup')
             {
