@@ -12,8 +12,16 @@ puts "Page title is #{driver.title}"
 
 driver.get 'GRAFANATARGET'
 expect(driver.title).to eql 'Grafana'
-driver.save_screenshot 'grafana.png'
+driver.save_screenshot 'grafana_start.png'
+browser.login_username.send_keys('admin')
+browser.login_password.send_keys('admin')
+browser.submit_button.click
+driver.save_screenshot 'grafana_login.png'
 puts "Page title is #{driver.title}"
+driver.get 'GRAFANATARGET/dashboard/db/haproxy-metrics?refresh=5s&orgId=1&from=now-5m&to=now'
+driver.save_screenshot 'grafana_haproxy.png'
+driver.get 'GRAFANATARGET//dashboard/db/apache-overview?refresh=30s&orgId=1&from=now-5m&to=now'
+driver.save_screenshot 'grafana_apache.png'
 
 driver.get 'KIBANATARGET'
 # expect(driver.title).to eql 'Kibana'
