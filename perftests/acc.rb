@@ -16,12 +16,14 @@ driver.save_screenshot 'grafana_start.png'
 driver.find_element(:name, "username").send_keys("admin")
 driver.find_element(:name, "password").send_keys("admin")
 driver.action.send_keys("\n").perform
-
+sleep 5
 driver.save_screenshot 'grafana_login.png'
 puts "Page title is #{driver.title}"
 driver.get 'GRAFANATARGET/dashboard/db/haproxy-metrics?refresh=5s&orgId=1&from=now-5m&to=now'
+sleep 5
 driver.save_screenshot 'grafana_haproxy.png'
 driver.get 'GRAFANATARGET//dashboard/db/apache-overview?refresh=30s&orgId=1&from=now-5m&to=now'
+sleep 5
 driver.save_screenshot 'grafana_apache.png'
 
 driver.get 'KIBANATARGET'
