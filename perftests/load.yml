@@ -1,3 +1,9 @@
+modules:
+  jmeter:
+    properties:  # system-properties works too
+      http.connection.stalecheck$Boolean: "true"
+      httpclient4.retrycount: 1
+
 execution:
 - concurrency: 1000
   ramp-up: 100
